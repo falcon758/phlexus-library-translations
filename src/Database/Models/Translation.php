@@ -19,7 +19,7 @@ class Translation extends Model
     /**
      * @var int
      */
-    public int $id;
+    public $id;
 
     /**
      * @var string
@@ -47,9 +47,9 @@ class Translation extends Model
     public int $languageID;
 
     /**
-     * @var int
+     * @var int|null
      */
-    public int $active;
+    public $active;
 
     /**
      * Initialize

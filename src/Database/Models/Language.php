@@ -19,7 +19,7 @@ class Language extends Model
     /**
      * @var int
      */
-    public int $id;
+    public $id;
 
     /**
      * @var string
@@ -32,9 +32,9 @@ class Language extends Model
     public string $language;
 
     /**
-     * @var int
+     * @var int|null
      */
-    public int $active;
+    public $active;
 
     /**
      * Initialize
