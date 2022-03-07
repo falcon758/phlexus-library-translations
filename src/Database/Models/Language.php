@@ -19,22 +19,22 @@ class Language extends Model
     /**
      * @var int
      */
-    public $id;
+    public int $id;
 
     /**
      * @var string
      */
-    public $iso;
+    public string $iso;
 
     /**
      * @var string
      */
-    public $language;
+    public string $language;
 
     /**
      * @var int
      */
-    public $active;
+    public int $active;
 
     /**
      * Initialize

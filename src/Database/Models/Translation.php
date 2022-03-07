@@ -19,37 +19,37 @@ class Translation extends Model
     /**
      * @var int
      */
-    public $id;
+    public int $id;
 
     /**
      * @var string
      */
-    public $key;
+    public string $key;
 
     /**
      * @var string
      */
-    public $translation;
+    public string $translation;
 
     /**
      * @var int
      */
-    public $textTypeID;
+    public int $textTypeID;
 
     /**
      * @var int
      */
-    public $pageID;
+    public int $pageID;
 
     /**
      * @var int
      */
-    public $languageID;
+    public int $languageID;
 
     /**
      * @var int
      */
-    public $active;
+    public int $active;
 
     /**
      * Initialize
