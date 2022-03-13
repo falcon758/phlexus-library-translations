@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Phlexus\Libraries\Translations;
 
-use Phalcon\Di\Injectable;
 use Phalcon\Translate\Adapter\AdapterInterface;
+use Phalcon\Di\Injectable;
 
 /**
  * Class TranslationAbstract
@@ -64,7 +64,7 @@ abstract class TranslationAbstract extends Injectable implements TranslationInte
     /**
      * TranslateFactory
      */
-    private array $translator = [];
+    private AdapterInterface $translator;
 
     /**
      * Call interceptor
@@ -153,14 +153,12 @@ abstract class TranslationAbstract extends Injectable implements TranslationInte
      */
     public function getTranslator(): AdapterInterface
     {
-        $translateName = $this->page . '_' . $this->type;
-
-        if (count($this->translator) > 0 && isset($this->factory[$translateName])) {
-            return $this->translator[$translateName];
+        if (isset($this->factory)) {
+            return $this->translator;
         }
 
-        $this->translator[$translateName] = $this->getTranslateFactory($this->page, $this->type);
+        $this->translator = $this->getTranslateFactory($this->page, $this->type);
 
-        return $this->translator[$translateName];
+        return $this->translator;
     }
 }
