@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Phlexus\Libraries\Translations;
 
+use Phlexus\Libraries\Translations\Database\Models\Page;
+use Phlexus\Libraries\Translations\Database\Models\TextType;
 use Phalcon\Di\Injectable;
 use Phalcon\Translate\Adapter\AdapterInterface;
 
@@ -21,26 +23,6 @@ use Phalcon\Translate\Adapter\AdapterInterface;
  */
 abstract class TranslationAbstract extends Injectable implements TranslationInterface
 {
-    /**
-     * PAGE
-     */
-    public const PAGE = 'page';
-
-    /**
-     * Message
-     */
-    public const MESSAGE = 'message';
-
-    /**
-     * Form
-     */
-    public const FORM = 'form';
-
-    /**
-     * DefaultPage
-     */
-    protected const DEFAULTPAGE = 'default';
-
     /**
      * Language
      */
@@ -127,7 +109,7 @@ abstract class TranslationAbstract extends Injectable implements TranslationInte
      */
     public function setPage(string $page = ''): TranslationInterface
     {
-        $this->page = !empty($page) ? $page : self::DEFAULTPAGE;
+        $this->page = !empty($page) ? $page : Page::DEFAULTPAGE;
 
         return $this;
     }
@@ -141,7 +123,43 @@ abstract class TranslationAbstract extends Injectable implements TranslationInte
      */
     public function setType(string $type = ''): TranslationInterface
     {
-        $this->type = !empty($type) ? $type : self::PAGE;
+        $this->type = !empty($type) ? $type : TextType::PAGE;
+
+        return $this;
+    }
+
+    /**
+     * Set type page
+     * 
+     * @return TranslationInterface
+     */
+    public function setTypePage(): TranslationInterface
+    {
+        $this->type = TextType::PAGE;
+
+        return $this;
+    }
+
+    /**
+     * Set type message
+     * 
+     * @return TranslationInterface
+     */
+    public function setTypeMessage(): TranslationInterface
+    {
+        $this->type = TextType::MESSAGE;
+
+        return $this;
+    }
+
+    /**
+     * Set type form
+     * 
+     * @return TranslationInterface
+     */
+    public function setTypeForm(): TranslationInterface
+    {
+        $this->type = TextType::FORM;
 
         return $this;
     }

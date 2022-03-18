@@ -17,6 +17,11 @@ class Page extends Model
     public const ENABLED = 1;
 
     /**
+     * DefaultPage
+     */
+    public const DEFAULTPAGE = 'default';
+
+    /**
      * @var int
      */
     public $id;

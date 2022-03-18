@@ -17,6 +17,21 @@ class TextType extends Model
     public const ENABLED = 1;
 
     /**
+     * PAGE
+     */
+    public const PAGE = 'page';
+
+    /**
+     * Message
+     */
+    public const MESSAGE = 'message';
+
+    /**
+     * Form
+     */
+    public const FORM = 'form';
+
+    /**
      * @var int
      */
     public $id;

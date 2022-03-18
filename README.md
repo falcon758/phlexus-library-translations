@@ -6,8 +6,10 @@ Translations library for Phlexus CMS.
 
 ```php
 use Phlexus\Libraries\Translations\TranslationFactory;
+use Phlexus\Libraries\Translations\Database\Models\Page;
+use Phlexus\Libraries\Translations\Database\Models\TextType;
 
 (new TranslationFactory())->build('en-US')
-                          ->setPageType('general', TranslationAbstract::PAGE)
+                          ->setPageType(PAGE::DEFAULTPAGE, TextType::PAGE)
 ``` 
 
