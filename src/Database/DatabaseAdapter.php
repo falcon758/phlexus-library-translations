@@ -134,8 +134,8 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
         }
         
         if (!$this->model->createTranslationsType(
-            $this->page, $this->type, $this->language,
-            $index, $message
+            $index, $this->page, $this->type,
+            $this->language, $message
         )) {
             return false;
         }

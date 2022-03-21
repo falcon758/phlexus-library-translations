@@ -15,7 +15,7 @@ namespace Phlexus\Libraries\Translations;
 
 use Phlexus\Helpers;
 use Phlexus\Libraries\Translations\Database\DatabaseAdapter;
-use Phlexus\Libraries\Translations\Database\Models\Translation;
+use Phlexus\Libraries\Translations\Database\Models\TranslationKey;
 use Phalcon\Translate\Adapter\AdapterInterface;
 use Phalcon\Translate\InterpolatorFactory;
 use Phalcon\Translate\TranslateFactory;
@@ -37,7 +37,7 @@ class TranslationDatabase extends TranslationAbstract
             [
                 'locale'        => $this->language,
                 'defaultLocale' => $this->defaultLanguage,
-                'model'         => new Translation,
+                'model'         => new TranslationKey,
                 'page'          => $page,
                 'type'          => $type,
             ]

@@ -16,7 +16,7 @@ namespace Phlexus\Libraries\Translations;
 use Phlexus\Helpers;
 use Phlexus\Libraries\Translations\Redis;
 use Phlexus\Libraries\Translations\Database\DatabaseAdapter;
-use Phlexus\Libraries\Translations\Database\Models\Translation as TranslationModel;
+use Phlexus\Libraries\Translations\Database\Models\TranslationKey as TranslationModel;
 use Phalcon\Translate\Adapter\AdapterInterface;
 use Phalcon\Translate\InterpolatorFactory;
 use Phalcon\Translate\TranslateFactory;
