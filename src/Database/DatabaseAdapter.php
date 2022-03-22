@@ -90,7 +90,7 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
             $this->page = $options['page'];
             $this->type = $options['type'];
 
-            $this->loadAll($this->page, $this->type);
+            $this->loadAll();
         }
 
         parent::__construct(new InterpolatorFactory, $options);
@@ -209,27 +209,24 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
     /**
      * Load all translations
      * 
-     * @param string $page Page to translate
-     * @param string $type Type to translate
-     * 
      * @return void
      */
-    private function loadAll(string $page, string $type): void
+    private function loadAll(): void
     {
         $model = $this->getModel();
 
-        $translations = $model::getTranslationsType($page, $type, $this->locale);
+        $translations = $model::getTranslationsType($this->page, $this->type, $this->locale);
 
         // Fallback to default language
         if (count($translations) === 0 && isset($this->defaultLocale)) {
             $this->language = $this->defaultLocale;
-            $translations = $model::getTranslationsType($page, $type, $this->language);
+            $translations = $model::getTranslationsType($this->page, $this->type, $this->language);
         }
 
         $parsedTranslations = [];
         
         array_walk($translations, function (&$value,$key) use (&$parsedTranslations) {
-            $parsedTranslations[ $value['key'] ] = $value['translation'];
+            $parsedTranslations[$value['key']] = $value['translation'];
         });
 
         $this->translations = $parsedTranslations;
