@@ -83,14 +83,19 @@ class TranslationKey extends Model
         $t_model = self::class;
 
         return self::query()
-            ->columns($t_model .'.*, T.translation')
+            ->columns(
+                $t_model .'.key AS key,'
+                . $t_model .'.textTypeID AS textTypeID,'
+                . $t_model .'.pageID AS pageID,'
+                . 'T.translation AS translation'
+            )
             ->innerJoin(Translation::class, null, 'T')
             ->innerJoin(TextType::class, null, 'TT')
             ->innerJoin(Page::class, null, 'PG')
             ->innerJoin(Language::class, null, 'LNG')
-            ->where('TT.type = :textType: AND PG.name = :pageName: AND LNG.language = :language:', [
-                'textType' => $type,
+            ->where('PG.name = :pageName: AND TT.type = :textType: AND LNG.language = :language:', [
                 'pageName' => $page,
+                'textType' => $type,
                 'language' => $language
             ])
             ->execute()
@@ -121,12 +126,12 @@ class TranslationKey extends Model
             return $translationKey;
         }
 
-        $translationModel              = new self;
-        $translationModel->key         = $key;
-        $translationModel->textTypeID  = $typeModel->id;
-        $translationModel->pageID      = $pageModel->id;
+        $translationKeyModel              = new self;
+        $translationKeyModel->key         = $key;
+        $translationKeyModel->textTypeID  = (int) $typeModel->id;
+        $translationKeyModel->pageID      = (int) $pageModel->id;
 
-        return $translationModel->save() ? $translationModel : null;
+        return $translationKeyModel->save() ? $translationKeyModel : null;
     }
 
     /**
@@ -153,10 +158,22 @@ class TranslationKey extends Model
             return false;
         }
 
-        $translationModel                 = new Translation;
-        $translationModel->translation    = $translation;
-        $translationModel->translationKey = $translationKey->id;
-        $translationModel->languageID     = $languageModel->id;
+        $translationModel = Translation::findFirst([
+            'conditions' => "translationKeyID = :translationKeyID: AND languageID = :languageID:",
+            'bind'       => [
+                'translationKeyID' => $translationKey->id,
+                'languageID'       => $languageModel->id
+            ],
+        ]);
+
+        if ($translationModel) {
+            return $translationModel;
+        }
+
+        $translationModel                   = new Translation;
+        $translationModel->translation      = $translation;
+        $translationModel->translationKeyID = (int) $translationKey->id;
+        $translationModel->languageID       = (int) $languageModel->id;
 
         return $translationModel->save() ? $translationModel : null;
     }

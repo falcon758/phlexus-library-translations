@@ -31,7 +31,8 @@ class TranslationRedis extends TranslationAbstract
      * 
      * @return AdapterInterface
      */
-    public function getTranslateFactory(string $page, string $type): AdapterInterface {
+    public function getTranslateFactory(string $page, string $type): AdapterInterface
+    {
         $page = strtolower($page);
 
         $translations = $this->getAll($page, $type);
@@ -66,7 +67,8 @@ class TranslationRedis extends TranslationAbstract
      * 
      * @return array
      */
-    private function getAll(string $page, string $type): array {
+    private function getAll(string $page, string $type): array
+    {
         $translations = TranslationModel::getTranslationsType($page, $type, $this->language);
 
         // Fallback to default language

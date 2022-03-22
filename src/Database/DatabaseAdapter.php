@@ -64,7 +64,8 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
      * 
      * @param array $options
      */
-    public function __construct(array $options) {
+    public function __construct(array $options)
+    {
         if (!isset($options['model'])) {
             throw new \Exception("Parameter 'model' is required");
         } else if (!$options['model'] instanceof Model) {
@@ -103,7 +104,8 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
      * 
      * @return string
      */
-    public function query(string $index, array $placeholders = []): string {
+    public function query(string $index, array $placeholders = []): string
+    {
         $value = $this->exists($index) ? $this->translations[$index] : $index;
 
         return $this->replacePlaceholders($value, $placeholders);   
@@ -115,7 +117,13 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
      * @param  string $index
      * @return bool
      */
-    public function exists(string $index): bool {
+    public function exists(string $index): bool
+    {
+        //@ToDo: Remove
+        //if (!isset($this->translations[$index])) {
+        //    $this->getModel()->createTranslationsType($index, $this->page, $this->type, $this->locale, $index);
+        //}
+
         return isset($this->translations[$index]) ? true : false;
     }
 
@@ -193,7 +201,8 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
     /**
      * @return Model
      */
-    private function getModel(): Model {
+    private function getModel(): Model
+    {
         return $this->model;
     }
 
@@ -205,7 +214,8 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
      * 
      * @return void
      */
-    private function loadAll(string $page, string $type): void {
+    private function loadAll(string $page, string $type): void
+    {
         $model = $this->getModel();
 
         $translations = $model::getTranslationsType($page, $type, $this->locale);
