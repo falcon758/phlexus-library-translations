@@ -120,7 +120,14 @@ class TranslationKey extends Model
             return null;
         }
 
-        $translationKey = self::findFirstByKey($key);
+        $translationKey = self::findFirst([
+            'conditions' => 'key = :key: AND pageID = :pageID: AND textTypeID = :textTypeID:',
+            'bind'       => [
+                'key'        => $key,
+                'pageID'     => $pageModel->id,
+                'textTypeID' => $typeModel->id
+            ],
+        ]);
 
         if ($translationKey) {
             return $translationKey;
