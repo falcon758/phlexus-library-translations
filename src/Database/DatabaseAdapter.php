@@ -119,12 +119,13 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
      */
     public function exists(string $index): bool
     {
-        //@ToDo: Remove
-        //if (!isset($this->translations[$index])) {
-        //    $this->getModel()->createTranslationsType($index, $this->page, $this->type, $this->locale, $index);
-        //}
+        $exists = isset($this->translations[$index]);
 
-        return isset($this->translations[$index]) ? true : false;
+        if (!$exists) {
+            $this->getModel()->createTranslationsType($index, $this->page, $this->type, $this->locale, $index);
+        }
+
+        return $exists ? true : false;
     }
 
      /**
