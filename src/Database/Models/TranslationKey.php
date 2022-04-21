@@ -93,16 +93,16 @@ class TranslationKey extends Model
         $t_model = self::class;
 
         return self::query()
-            ->columns(
-                $t_model .'.key AS key,'
-                . $t_model .'.textTypeID AS textTypeID,'
-                . $t_model .'.pageID AS pageID,'
-                . 'T.translation AS translation'
-            )
+            ->columns([
+                $t_model .'.key AS key',
+                $t_model .'.textTypeID AS textTypeID',
+                $t_model .'.pageID AS pageID',
+                'T.translation AS translation'
+            ])
             ->innerJoin(Translation::class, null, 'T')
             ->innerJoin(TextType::class, null, 'TT')
             ->innerJoin(Page::class, null, 'PG')
-            ->innerJoin(Language::class, null, 'LNG')
+            ->innerJoin(Language::class, 'T.languageID = LNG.id', 'LNG')
             ->where('PG.name = :pageName: AND TT.type = :textType: AND LNG.language = :language:', [
                 'pageName' => $page,
                 'textType' => $type,
