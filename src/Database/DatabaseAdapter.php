@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Phlexus\Libraries\Translations\Database;
 
-use Phalcon\Mvc\Model;
+use Phlexus\Models\Model;
 use Phalcon\Translate\Adapter\AdapterInterface;
 use Phalcon\Translate\Adapter\AbstractAdapter;
 use Phalcon\Translate\InterpolatorFactory;
@@ -27,7 +27,7 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
     /**
      * Model object.
      *
-     * @var \Phalcon\Mvc\Model
+     * @var \Phlexus\Models\Model
      */
     protected Model $model;
 

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Phlexus\Libraries\Translations\Database\Models;
 
-use Phalcon\Mvc\Model;
+use Phlexus\Models\Model;
 
 /**
  * Class TextType
