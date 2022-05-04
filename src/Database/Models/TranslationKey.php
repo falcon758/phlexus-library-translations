@@ -131,8 +131,9 @@ class TranslationKey extends Model
         }
 
         $translationKey = self::findFirst([
-            'conditions' => 'key = :key: AND pageID = :pageID: AND textTypeID = :textTypeID:',
+            'conditions' => 'active = :active: AND key = :key: AND pageID = :pageID: AND textTypeID = :textTypeID:',
             'bind'       => [
+                'active'     => self::ENABLED,
                 'key'        => $key,
                 'pageID'     => $pageModel->id,
                 'textTypeID' => $typeModel->id
@@ -176,8 +177,9 @@ class TranslationKey extends Model
         }
 
         $translationModel = Translation::findFirst([
-            'conditions' => "translationKeyID = :translationKeyID: AND languageID = :languageID:",
+            'conditions' => 'active = :active: AND translationKeyID = :translationKeyID: AND languageID = :languageID:',
             'bind'       => [
+                'active'           => self::ENABLED,
                 'translationKeyID' => $translationKey->id,
                 'languageID'       => $languageModel->id
             ],
