@@ -33,8 +33,6 @@ class TranslationRedis extends TranslationAbstract
      */
     public function getTranslateFactory(string $page, string $type): AdapterInterface
     {
-        $page = strtolower($page);
-
         $translations = $this->getAll($page, $type);
 
         $redis = new Redis(
@@ -80,7 +78,7 @@ class TranslationRedis extends TranslationAbstract
         $parsedTranslations = [];
         
         array_walk($translations, function (&$value,$key) use (&$parsedTranslations) {
-            $parsedTranslations[ $value['key'] ] = $value['translation'];
+            $parsedTranslations[$value['key']] = $value['translation'];
         });
 
         return $parsedTranslations;

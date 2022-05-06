@@ -220,8 +220,8 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
 
         // Fallback to default language
         if (count($translations) === 0 && isset($this->defaultLocale)) {
-            $this->language = $this->defaultLocale;
-            $translations = $model::getTranslationsType($this->page, $this->type, $this->language);
+            $this->locale = $this->defaultLocale;
+            $translations = $model::getTranslationsType($this->page, $this->type, $this->locale);
         }
 
         $parsedTranslations = [];

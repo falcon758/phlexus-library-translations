@@ -77,8 +77,8 @@ abstract class TranslationAbstract extends Injectable implements TranslationInte
             throw new \Exception('Unable to setup translation!');
         }
 
-        $this->language        = $language;
-        $this->defaultLanguage = $defaultLanguage;
+        $this->language        = strtolower($language);
+        $this->defaultLanguage = strtolower($defaultLanguage);
 
         $this->setPage();
         $this->setType();
@@ -109,7 +109,7 @@ abstract class TranslationAbstract extends Injectable implements TranslationInte
      */
     public function setPage(string $page = ''): TranslationInterface
     {
-        $this->page = !empty($page) ? $page : Page::DEFAULTPAGE;
+        $this->page = !empty($page) ? strtolower($page) : Page::DEFAULTPAGE;
 
         return $this;
     }
@@ -123,7 +123,7 @@ abstract class TranslationAbstract extends Injectable implements TranslationInte
      */
     public function setType(string $type = ''): TranslationInterface
     {
-        $this->type = !empty($type) ? $type : TextType::PAGE;
+        $this->type = !empty($type) ? strtolower($type) : TextType::PAGE;
 
         return $this;
     }

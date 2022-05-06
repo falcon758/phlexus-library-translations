@@ -31,8 +31,6 @@ class TranslationDatabase extends TranslationAbstract
      * @return AdapterInterface
      */
     public function getTranslateFactory(string $page, string $type): AdapterInterface {
-        $page = strtolower($page);
-
         return new DatabaseAdapter(
             [
                 'locale'        => $this->language,
