@@ -200,6 +200,16 @@ class Redis extends AbstractAdapter implements AdapterInterface
     }
 
     /**
+     * Cache loaded
+     *
+     * @return boolean
+     */
+    public function hasChache(): bool
+    {
+        return count($this->cache) > 0;
+    }
+
+    /**
      * Loads key from Redis to local cache.
      *
      * @param string $key

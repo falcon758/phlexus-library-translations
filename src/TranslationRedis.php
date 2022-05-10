@@ -33,8 +33,6 @@ class TranslationRedis extends TranslationAbstract
      */
     public function getTranslateFactory(string $page, string $type): AdapterInterface
     {
-        $translations = $this->getAll($page, $type);
-
         $redis = new Redis(
             [
                 'locale' => $this->language,
@@ -44,6 +42,9 @@ class TranslationRedis extends TranslationAbstract
                 'levels' => 5,
             ]
         );
+
+        // Avoid unecessary quering if already loaded
+        $translations = !$redis->hasChache() ? $this->getAll($page, $type) : [];
 
         foreach ($translations as $key => $translation) {
             // If key already exists, assume it's already loaded
