@@ -62,9 +62,10 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
     /**
      * Constructor
      * 
+     * @param InterpolatorFactory $interpolator
      * @param array $options
      */
-    public function __construct(array $options)
+    public function __construct(InterpolatorFactory $interpolator, array $options = [])
     {
         if (!isset($options['model'])) {
             throw new \Exception("Parameter 'model' is required");
@@ -93,7 +94,7 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
             $this->loadAll();
         }
 
-        parent::__construct(new InterpolatorFactory, $options);
+        parent::__construct($interpolator, $options);
     }
 
     /**
@@ -115,6 +116,7 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
      * Check if index exists
      * 
      * @param  string $index
+     * 
      * @return bool
      */
     public function exists(string $index): bool
@@ -126,6 +128,18 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
         }
 
         return $exists ? true : false;
+    }
+
+    /**
+     * Check if has index
+     * 
+     * @param  string $index
+     * 
+     * @return bool
+     */
+    public function has(string $index): bool
+    {
+        return $this->exists();
     }
 
      /**

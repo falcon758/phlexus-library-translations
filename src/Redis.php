@@ -7,7 +7,7 @@ use Phalcon\Translate\Adapter\AdapterInterface;
 use Phalcon\Translate\Adapter\AbstractAdapter;
 use Phalcon\Translate\InterpolatorFactory;
 use Phalcon\Translate\Exception;
-use Phalcon\Cache\Adapter\Redis as RedisCache;
+use Phalcon\Storage\Adapter\Redis as RedisCache;
 
 /**
  * Class Redis

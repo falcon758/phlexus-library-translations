@@ -34,6 +34,7 @@ class TranslationRedis extends TranslationAbstract
     public function getTranslateFactory(string $page, string $type): AdapterInterface
     {
         $redis = new Redis(
+            new InterpolatorFactory(),
             [
                 'locale' => $this->language,
                 'page'   => $page,
