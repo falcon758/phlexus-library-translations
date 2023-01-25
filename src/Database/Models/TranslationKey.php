@@ -121,7 +121,7 @@ class TranslationKey extends Model
      * 
      * @return mixed TranslationKey or null
      */
-    public static function createTranslationKey(string $key, string $page, string $type)
+    public static function createTranslationKey(string $key, string $page, string $type): ?TranslationKey
     {
         $pageModel = Page::findFirstByname($page);
         $typeModel = TextType::findFirstBytype($type);
@@ -166,14 +166,14 @@ class TranslationKey extends Model
     public static function createTranslationsType(
         string $key, string $page, string $type,
         string $language, string $translation
-    )
+    ): ?Translation
     {
         $languageModel = Language::findFirstBylanguage($language);
 
         $translationKey = self::createTranslationKey($key, $page, $type);
 
         if (!$translationKey || !$languageModel) {
-            return false;
+            return null;
         }
 
         $translationModel = Translation::findFirst([

@@ -63,7 +63,7 @@ class Page extends Model
      * 
      * @return mixed Page or null
      */
-    public static function createPage(string $name)
+    public static function createPage(string $name): ?Page
     {
         $page = self::findFirstByname($name);
 
