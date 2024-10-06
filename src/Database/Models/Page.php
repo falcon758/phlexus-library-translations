@@ -24,7 +24,7 @@ class Page extends Model
     /**
      * @var int|null
      */
-    public ?int $id;
+    public ?int $id = null;
 
     /**
      * @var string
@@ -34,17 +34,17 @@ class Page extends Model
     /**
      * @var int|null
      */
-    public ?int $active;
+    public ?int $active = null;
 
     /**
      * @var string|null
      */
-    public ?string $createdAt;
+    public ?string $createdAt = null;
 
     /**
      * @var string|null
      */
-    public ?string $modifiedAt;
+    public ?string $modifiedAt = null;
 
     /**
      * Initialize
