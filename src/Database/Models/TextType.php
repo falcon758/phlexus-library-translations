@@ -32,9 +32,9 @@ class TextType extends Model
     public const FORM = 'form';
 
     /**
-     * @var int
+     * @var int|null
      */
-    public $id;
+    public ?int $id;
 
     /**
      * @var string
@@ -44,17 +44,17 @@ class TextType extends Model
     /**
      * @var int|null
      */
-    public $active;
+    public ?int $active;
 
     /**
      * @var string|null
      */
-    public $createdAt;
+    public ?string $createdAt;
 
     /**
      * @var string|null
      */
-    public $modifiedAt;
+    public ?string $modifiedAt;
 
     /**
      * Initialize

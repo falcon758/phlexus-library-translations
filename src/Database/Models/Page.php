@@ -22,9 +22,9 @@ class Page extends Model
     public const DEFAULTPAGE = 'default';
 
     /**
-     * @var int
+     * @var int|null
      */
-    public $id;
+    public ?int $id;
 
     /**
      * @var string
@@ -34,17 +34,17 @@ class Page extends Model
     /**
      * @var int|null
      */
-    public $active;
+    public ?int $active;
 
     /**
      * @var string|null
      */
-    public $createdAt;
+    public ?string $createdAt;
 
     /**
      * @var string|null
      */
-    public $modifiedAt;
+    public ?string $modifiedAt;
 
     /**
      * Initialize
