@@ -69,17 +69,33 @@ class TranslationRedis extends TranslationAbstract
      */
     private function getAll(string $page, string $type): array
     {
-        $translations = TranslationModel::getTranslationsType($page, $type, $this->language);
+        $translations = $this->parseTranslations(
+            TranslationModel::getTranslationsType($page, $type, $this->language)
+        );
 
-        // Fallback to default language
-        if (count($translations) === 0 && isset($this->defaultLanguage)) {
-            $this->language = $this->defaultLanguage;
-            $translations = TranslationModel::getTranslationsType($page, $type, $this->language);
+        if (isset($this->defaultLanguage) && $this->defaultLanguage !== $this->language) {
+            $defaultTranslations = $this->parseTranslations(
+                TranslationModel::getTranslationsType($page, $type, $this->defaultLanguage)
+            );
+
+            $translations = array_replace($defaultTranslations, $translations);
         }
 
+        return $translations;
+    }
+
+    /**
+     * Parse translation rows into key-value pairs.
+     *
+     * @param array $translations
+     *
+     * @return array
+     */
+    private function parseTranslations(array $translations): array
+    {
         $parsedTranslations = [];
-        
-        array_walk($translations, function (&$value,$key) use (&$parsedTranslations) {
+
+        array_walk($translations, function (&$value, $key) use (&$parsedTranslations) {
             $parsedTranslations[$value['key']] = $value['translation'];
         });
 

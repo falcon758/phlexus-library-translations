@@ -230,20 +230,36 @@ class DatabaseAdapter extends AbstractAdapter implements AdapterInterface
     {
         $model = $this->getModel();
 
-        $translations = $model::getTranslationsType($this->page, $this->type, $this->locale);
+        $translations = $this->parseTranslations(
+            $model::getTranslationsType($this->page, $this->type, $this->locale)
+        );
 
-        // Fallback to default language
-        if (count($translations) === 0 && isset($this->defaultLocale)) {
-            $this->locale = $this->defaultLocale;
-            $translations = $model::getTranslationsType($this->page, $this->type, $this->locale);
+        if (isset($this->defaultLocale) && $this->defaultLocale !== $this->locale) {
+            $defaultTranslations = $this->parseTranslations(
+                $model::getTranslationsType($this->page, $this->type, $this->defaultLocale)
+            );
+
+            $translations = array_replace($defaultTranslations, $translations);
         }
 
+        $this->translations = $translations;
+    }
+
+    /**
+     * Parse translation rows into key-value pairs.
+     *
+     * @param array $translations
+     *
+     * @return array
+     */
+    private function parseTranslations(array $translations): array
+    {
         $parsedTranslations = [];
-        
-        array_walk($translations, function (&$value,$key) use (&$parsedTranslations) {
+
+        array_walk($translations, function (&$value, $key) use (&$parsedTranslations) {
             $parsedTranslations[$value['key']] = $value['translation'];
         });
 
-        $this->translations = $parsedTranslations;
+        return $parsedTranslations;
     }
 }
