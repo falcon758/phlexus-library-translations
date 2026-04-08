@@ -59,6 +59,7 @@ class TranslationKey extends Model
     public function initialize()
     {
         $this->setSource('translation_keys');
+        $this->skipAttributesOnUpdate(['createdAt']);
 
         $this->hasMany('id', Translation::class, 'translationKeyID', [
             'alias'      => 'translationKey',
@@ -76,6 +77,14 @@ class TranslationKey extends Model
             'alias'    => 'Page',
             'reusable' => true,
         ]);
+    }
+
+    /**
+     * Before update
+     */
+    public function beforeUpdate()
+    {
+        $this->modifiedAt = date('Y-m-d H:i:s');
     }
 
 
